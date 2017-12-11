@@ -16,7 +16,7 @@
                 </x:Array>
             </ListView.ItemsSource>
             <ListView.Header>
-                <Grid BackgroundColor="#3f819b">
+                <Grid BackgroundColor="#001f3f">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10"/>
                         <ColumnDefinition Width="*"/>

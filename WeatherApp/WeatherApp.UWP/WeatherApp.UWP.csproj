@@ -176,6 +176,7 @@
     <Content Include="d389.png" />
     <Content Include="d392.png" />
     <Content Include="d395.png" />
+    <Content Include="humidity.png" />
     <Content Include="n113.png" />
     <Content Include="n116.png" />
     <Content Include="n119.png" />
@@ -224,6 +225,7 @@
     <Content Include="n389.png" />
     <Content Include="n392.png" />
     <Content Include="n395.png" />
+    <Content Include="precipitation.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-100.png" />
     <Content Include="Assets\LockScreenLogo.scale-125.png" />
@@ -255,6 +257,8 @@
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="visibility.png" />
+    <Content Include="wind.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
