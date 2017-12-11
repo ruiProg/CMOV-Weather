@@ -9,6 +9,8 @@ namespace WeatherApp
 {
     public partial class App : Application
     {
+        public static string currentCity = null;
+
         public App()
         {
             InitializeComponent();

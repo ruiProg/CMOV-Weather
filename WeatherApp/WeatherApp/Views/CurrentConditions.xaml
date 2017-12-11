@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherApp.CurrentConditions"
+             Title="Current">
+    <ContentPage.Content>
+        <StackLayout Padding="10" Spacing="5">
+            <Label
+                Text="{Binding City}"
+                FontSize="Large"
+                FontFamily="Abril Fatface"
+                HorizontalOptions="CenterAndExpand" />
+            <Label
+                Text="{Binding RegionName}"
+                FontSize="Small"
+                HorizontalOptions="CenterAndExpand" />
+            <Label
+                Text="{Binding Temperature}"
+                FontSize="Large"
+                FontAttributes="Bold"
+                FontFamily="Open Sans"
+                HorizontalOptions="CenterAndExpand" />
+            <Image Source="{Binding CondImage}" HeightRequest="128" WidthRequest="128" />
+            <Label
+                Text="{Binding CondText}"
+                HorizontalOptions="CenterAndExpand" />
+            <Label
+                Text="{Binding LastUpdate}"
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
