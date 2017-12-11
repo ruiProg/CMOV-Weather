@@ -19,6 +19,8 @@ namespace WeatherApp
             App.currentCity = "Porto";
             RetrieveWeather();
             InitializeComponent();
+            if (Device.RuntimePlatform == Device.Android)
+                BackgroundColor = Color.FromHex("#0f4727");
         }
 
         async void RetrieveWeather()

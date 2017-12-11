@@ -25,6 +25,8 @@ namespace WeatherApp
                 var currStr = Helpers.Settings.GetUnit(entry.Value.Item3) ? entry.Value.Item2 : entry.Value.Item1;
                 Units.Add(new Unit() { Name = entry.Key, Current = currStr });
             }
+            if (Device.RuntimePlatform == Device.Android)
+                BackgroundColor = Color.FromHex("#404040");
         }
 
         async void OnTap(object sender, ItemTappedEventArgs e)
