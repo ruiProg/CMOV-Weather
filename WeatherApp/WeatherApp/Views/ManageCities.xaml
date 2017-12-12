@@ -5,12 +5,12 @@
     <ContentPage.Content>
         <StackLayout Padding="10">
             <StackLayout Orientation="Horizontal">
-                <StackLayout HorizontalOptions="FillAndExpand">
-                    <Picker Title="Select country" ItemsSource="{Binding Countries}" ItemDisplayBinding="{Binding Name}" />
-                    <Picker Title="Select region" ItemsSource="{Binding Regions}" ItemDisplayBinding="{Binding Name}" />
-                    <Picker Title="Select city" ItemsSource="{Binding RegionCities}" ItemDisplayBinding="{Binding Name}" />
+                <StackLayout HorizontalOptions="FillAndExpand" Scale="0.8">
+                    <Picker Title="Select country" x:Name="countriesList" ItemDisplayBinding="{Binding Name}" SelectedIndexChanged="OnCountrySelected" />
+                    <Picker Title="Select region" x:Name="regionsList" ItemDisplayBinding="{Binding Name}" SelectedIndexChanged="OnRegionSelected" />
+                    <Picker Title="Select city" x:Name="citiesList" ItemDisplayBinding="{Binding Name}" />
                 </StackLayout>
-                <Button Text="Add City" VerticalOptions="Center"></Button>
+                <Button Text="Add City" VerticalOptions="Center" Clicked="OnAddClicked"></Button>
             </StackLayout>
             <ListView x:Name="citiesView" ItemSelected="OnSelected" HorizontalOptions="End">
                 <ListView.ItemTemplate>

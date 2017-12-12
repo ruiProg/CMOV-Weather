@@ -14,7 +14,7 @@ mysql.init_app(app)
 
 @app.route("/")
 def hello():
-    return "Hello World!"
+    return "List of Cities Database"
 
 @app.route('/countries')
 def countries():
@@ -25,7 +25,7 @@ def countries():
 				"id" : row[0],
 				"name" : row[1],
 			}
-			for row in cursor.fetchall()
+			for row in cursor.fetchall() if row[1]
 		]
 		cursor.close()
 		return json.dumps(itList)
@@ -40,7 +40,7 @@ def regions():
 				"id" : row[0],
 				"name" : row[1],
 			}
-			for row in cursor.fetchall()
+			for row in cursor.fetchall() if row[1]
 		]
 		cursor.close()
 		return json.dumps(itList)
@@ -61,7 +61,7 @@ def cities():
 				"region" : row[2],
 				"country" : row[3]
 			}
-			for row in cursor.fetchall()
+			for row in cursor.fetchall() if row[1]
 		]
 		cursor.close()
 		return json.dumps(itList)

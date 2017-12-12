@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using WeatherApp.Models;
 using Xamarin.Forms;
 
 namespace WeatherApp
@@ -10,11 +10,12 @@ namespace WeatherApp
     public partial class App : Application
     {
         public static string currentCity = null;
+   
+        public static List<Country> Countries { get; set; }
 
         public App()
         {
             InitializeComponent();
-
             MainPage = new WeatherApp.CityWeather();
         }
 

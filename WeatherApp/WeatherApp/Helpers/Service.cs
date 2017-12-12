@@ -14,6 +14,7 @@ namespace WeatherApp
         static HttpClient client = new HttpClient();
         static String apixuKey = "48de77b9d0584523a65161204170812";
         static String apixuBaseUrl = "https://api.apixu.com/v1";
+        static String serverURL = "http://3a0ef9a5.ngrok.io";
 
         public static async Task<CurrentTemp> getCurrentWeather()
         {
@@ -25,6 +26,48 @@ namespace WeatherApp
             if (response != null) {
                 string json = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<CurrentTemp>(json);
+            }
+
+            return null;
+        }
+
+        public static async Task<List<Country>> getCountries()
+        {
+            var queryString = String.Format("{0}/countries", serverURL);
+            var response = await client.GetAsync(queryString);
+
+            if (response != null)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<Country>>(json);
+            }
+
+            return null;
+        }
+
+        public static async Task<List<Region>> getRegions(int countryID)
+        {
+            var queryString = String.Format("{0}/regions?country={1}", serverURL, countryID);
+            var response = await client.GetAsync(queryString);
+
+            if (response != null)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<Region>>(json);
+            }
+
+            return null;
+        }
+
+        public static async Task<List<City>> getCities(int countryID, int regionID)
+        {
+            var queryString = String.Format("{0}/cities?country={1}&region={2}", serverURL, countryID, regionID);
+            var response = await client.GetAsync(queryString);
+
+            if (response != null)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<City>>(json);
             }
 
             return null;

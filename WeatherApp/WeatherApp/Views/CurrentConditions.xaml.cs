@@ -26,7 +26,19 @@ namespace WeatherApp
 
         async void RetrieveWeather()
         {
-            var temp = await Service.getCurrentWeather();
+            CurrentTemp temp = null;
+            try
+            {
+                temp = await Service.getCurrentWeather();
+            }
+            catch (Exception)
+            {
+            }
+            if (temp == null)
+            {
+                temp = new CurrentTemp();
+                await DisplayAlert("Alert", "Service is not available", "OK");
+            }
             data = new CurrentInfo(temp);
             this.BindingContext = data;
         }

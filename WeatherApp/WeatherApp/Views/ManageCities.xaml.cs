@@ -15,7 +15,7 @@ namespace WeatherApp
     {
         private ObservableCollection<CityDetails> Cities { get; set; }
 
-        private List<Country> Countries { get; set; }
+        private List<Country> Countries { get; set; } = null;
 
         private List<Region> Regions { get; set; }
 
@@ -24,6 +24,7 @@ namespace WeatherApp
 
         public ManageCities()
         {
+            RetrieveCountries();
             Cities = new ObservableCollection<CityDetails>();
             InitializeComponent();
             citiesView.ItemsSource = Cities;
@@ -56,5 +57,53 @@ namespace WeatherApp
             Helpers.Settings.MyCitiesList = Cities.ToList();
         }
 
+        async void RetrieveCountries()
+        {
+            if (Countries == null)
+            {
+                Countries = await Service.getCountries();
+                countriesList.ItemsSource = Countries;
+            }
+        }
+
+        async void OnCountrySelected(object sender, EventArgs e)
+        {
+            var picker = (Picker)sender;
+            int selectedIndex = picker.SelectedIndex;
+
+            if (selectedIndex != -1)
+            {
+                int countryID = ((Country)picker.ItemsSource[selectedIndex]).ID;
+                Regions = await Service.getRegions(countryID);
+                regionsList.ItemsSource = Regions;
+                citiesList.ItemsSource = null;
+            }
+        }
+
+        async void OnRegionSelected(object sender, EventArgs e)
+        {
+            var picker = (Picker)sender;
+            int selectedIndex = picker.SelectedIndex;
+
+            if (selectedIndex != -1)
+            {
+                int countryID = ((Country)countriesList.ItemsSource[countriesList.SelectedIndex]).ID;
+                int regionID = ((Region)picker.ItemsSource[selectedIndex]).ID;
+                RegionCities = await Service.getCities(countryID, regionID);
+                citiesList.ItemsSource = RegionCities;
+            }
+        }
+
+        async void OnAddClicked(object sender, EventArgs e)
+        {
+            int selectedIndex = citiesList.SelectedIndex;
+            if (selectedIndex != -1)
+            {
+                var newCity = ((City)citiesList.ItemsSource[citiesList.SelectedIndex]);
+                Cities.Add(new CityDetails(newCity));
+                Helpers.Settings.MyCitiesList = Cities.ToList();
+            }
+            else await DisplayAlert("Alert", "No city selected", "OK");
+        }
     }
 }
