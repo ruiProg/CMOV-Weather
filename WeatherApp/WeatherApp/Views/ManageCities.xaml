@@ -4,10 +4,25 @@
              x:Class="WeatherApp.ManageCities">
     <ContentPage.Content>
         <StackLayout Padding="10">
-            <ListView x:Name="citiesView" ItemSelected="OnSelected">
+            <StackLayout Orientation="Horizontal">
+                <StackLayout HorizontalOptions="FillAndExpand">
+                    <Picker Title="Select country" ItemsSource="{Binding Countries}" ItemDisplayBinding="{Binding Name}" />
+                    <Picker Title="Select region" ItemsSource="{Binding Regions}" ItemDisplayBinding="{Binding Name}" />
+                    <Picker Title="Select city" ItemsSource="{Binding RegionCities}" ItemDisplayBinding="{Binding Name}" />
+                </StackLayout>
+                <Button Text="Add City" VerticalOptions="Center"></Button>
+            </StackLayout>
+            <ListView x:Name="citiesView" ItemSelected="OnSelected" HorizontalOptions="End">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding Name}" Detail="{Binding Details}" />
+                        <TextCell
+                            Text="{Binding Name}"
+                            Detail="{Binding Details}" >
+                            <TextCell.ContextActions>
+                                <MenuItem Clicked="OnDelete" Text="Delete" IsDestructive="true" CommandParameter="{Binding .}" />
+                            </TextCell.ContextActions>
+                        </TextCell>
+                                
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

@@ -15,6 +15,13 @@ namespace WeatherApp
     {
         private ObservableCollection<CityDetails> Cities { get; set; }
 
+        private List<Country> Countries { get; set; }
+
+        private List<Region> Regions { get; set; }
+
+        private List<City> RegionCities { get; set; }
+
+
         public ManageCities()
         {
             Cities = new ObservableCollection<CityDetails>();
@@ -31,7 +38,7 @@ namespace WeatherApp
             };*/
         }
 
-        async void OnSelected(object sender, SelectedItemChangedEventArgs e)
+        void OnSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null)
             {
@@ -40,5 +47,14 @@ namespace WeatherApp
             var item = (CityDetails)e.SelectedItem;
             Helpers.Settings.CurrentCity = item;
         }
+
+        private void OnDelete(object sender, EventArgs e)
+        {
+            var item = (MenuItem)sender;
+            var city = (CityDetails) item.CommandParameter;
+            Cities.Remove(city);
+            Helpers.Settings.MyCitiesList = Cities.ToList();
+        }
+
     }
 }
