@@ -35,9 +35,9 @@ namespace WeatherApp.Models
 
         public Location()
         {
-            City = "";
-            GeoRegion = "";
-            Country = "";
+            City = "Unavailable";
+            GeoRegion = "Unavailable";
+            Country = "Unavailable";
         }
     }
 
@@ -126,8 +126,8 @@ namespace WeatherApp.Models
 
         public Condition()
         {
-            Text = "";
-            IconPath = "";
+            Text = "No Data";
+            IconPath = "icon.png";
         }
     }
 }

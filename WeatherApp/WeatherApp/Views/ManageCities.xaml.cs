@@ -61,8 +61,16 @@ namespace WeatherApp
         {
             if (Countries == null)
             {
-                Countries = await Service.getCountries();
-                countriesList.ItemsSource = Countries;
+                try
+                {
+                    Countries = await Service.getCountries();
+                    countriesList.ItemsSource = Countries;
+                }
+                catch (Exception)
+                {
+                }
+                if (Countries == null)
+                    await DisplayAlert("Alert", "Service is not available", "OK");
             }
         }
 
