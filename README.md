@@ -9,6 +9,11 @@ pass: December14
 #### API key:
 48de77b9d0584523a65161204170812
 
+#### Server with cities uses Flask:
+http://flask.pocoo.org/
+
+#### Populate server database (MySQL):
+https://github.com/prograhammer/countries-regions-cities
 
 #### Disable Hyper-V(to test in Android):
 bcdedit /set hypervisorlaunchtype off
