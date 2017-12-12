@@ -39,6 +39,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Models\City.cs" />
+    <Compile Include="Models\CityDetails.cs" />
     <Compile Include="Models\CurrentInfo.cs" />
     <Compile Include="Models\CurrentTemp.cs" />
     <Compile Include="Models\Unit.cs" />

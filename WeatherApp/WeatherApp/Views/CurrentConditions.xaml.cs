@@ -16,7 +16,8 @@ namespace WeatherApp
 
         public CurrentConditions()
         {
-            App.currentCity = "Porto";
+            var currCity = Helpers.Settings.CurrentCity;
+            App.currentCity = currCity.Name + ", " + currCity.Details;
             RetrieveWeather();
             InitializeComponent();
             if (Device.RuntimePlatform == Device.Android)
@@ -26,7 +27,6 @@ namespace WeatherApp
         async void RetrieveWeather()
         {
             var temp = await Service.getCurrentWeather();
-            System.Diagnostics.Debug.WriteLine(temp.Info.LastUpdate);
             data = new CurrentInfo(temp);
             this.BindingContext = data;
         }

@@ -1,6 +1,9 @@
 // Helpers/Settings.cs
+using Newtonsoft.Json;
 using Plugin.Settings;
 using Plugin.Settings.Abstractions;
+using System.Collections.Generic;
+using WeatherApp.Models;
 
 namespace WeatherApp.Helpers
 {
@@ -19,9 +22,10 @@ namespace WeatherApp.Helpers
 			}
 		}
 
-		#region Setting Constants
+        #region Setting Constants
 
-		//private const string TempKey = "temp_unit";
+        private const string myCities = "my_cities";
+        private const string selectedCity = "current_city";
 
         #endregion
 
@@ -33,6 +37,42 @@ namespace WeatherApp.Helpers
         public static bool SetUnit(string key, bool value)
         {
             return AppSettings.AddOrUpdateValue(key, value);
+        }
+
+
+        public static List<CityDetails> MyCitiesList
+        {
+            get
+            {
+                string value = AppSettings.GetValueOrDefault(myCities, string.Empty);
+                List<CityDetails> myList;
+                if (string.IsNullOrEmpty(value))
+                    myList = new List<CityDetails>();
+                else
+                    myList = JsonConvert.DeserializeObject<List<CityDetails>>(value);
+                return myList;
+            }
+            set
+            {
+                string listValue = JsonConvert.SerializeObject(value);
+                AppSettings.AddOrUpdateValue(myCities, listValue);
+            }
+        }
+
+        public static CityDetails CurrentCity
+        {
+            get
+            {
+                string value = AppSettings.GetValueOrDefault(selectedCity, string.Empty);
+                if (string.IsNullOrEmpty(value))
+                    return new CityDetails();
+                else return JsonConvert.DeserializeObject<CityDetails>(value);
+            }
+            set
+            {
+                string valueStr = JsonConvert.SerializeObject(value);
+                AppSettings.AddOrUpdateValue(selectedCity, valueStr);
+            }
         }
     }
 }
