@@ -22,7 +22,7 @@ namespace WeatherApp
             if (listCities.Any())
             {
                 All = new ObservableCollection<CurrentInfo>();
-                foreach (var city in Helpers.Settings.MyCitiesList)
+                foreach (var city in listCities)
                     All.Add(new CurrentInfo());
                 RetrieveWeather(0);
             }
@@ -63,4 +63,3 @@ namespace WeatherApp
         }
     }
 }
-
