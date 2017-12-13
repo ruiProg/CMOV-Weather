@@ -10,7 +10,7 @@
               HasUnevenRows="true">
             <ListView.ItemsSource>
                 <x:Array Type="{x:Type local:CityWeatherMenuItem}">
-                    <local:CityWeatherMenuItem Title="My City" Id="0" TargetType="{x:Type local:CityWeatherTabs}" />
+                    <local:CityWeatherMenuItem Title="City Weather" Id="0" TargetType="{x:Type local:CurrentConditions}" />
                     <local:CityWeatherMenuItem Title="Manage Cities" Id="1" TargetType="{x:Type local:ManageCities}" />
                     <local:CityWeatherMenuItem Title="Settings" Id="2" TargetType="{x:Type local:Settings}" />
                 </x:Array>
@@ -33,7 +33,7 @@
                     <Label
               Grid.Column="1"
               Grid.Row="1"
-              Text="Cities Weather"
+              Text="Weather"
               Style="{DynamicResource SubtitleStyle}"/>
                 </Grid>
             </ListView.Header>

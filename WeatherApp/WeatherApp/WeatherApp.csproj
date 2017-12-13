@@ -56,11 +56,17 @@
     <Compile Include="Views\CityWeatherTabs.xaml.cs">
       <DependentUpon>CityWeatherTabs.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CurrentConditions.xaml.cs">
-      <DependentUpon>CurrentConditions.xaml</DependentUpon>
+    <Compile Include="Views\CurrentCarousel.xaml.cs">
+      <DependentUpon>CurrentCarousel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CurrentConditionsa.xaml.cs">
+      <DependentUpon>CurrentConditionsa.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\History.xaml.cs">
       <DependentUpon>History.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CurrentConditions.xaml.cs">
+      <DependentUpon>CurrentConditions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ManageCities.xaml.cs">
       <DependentUpon>ManageCities.xaml</DependentUpon>
@@ -133,7 +139,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\CurrentConditions.xaml">
+    <EmbeddedResource Include="Views\CurrentConditionsa.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -152,6 +158,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Settings.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\CurrentCarousel.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\CurrentConditions.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

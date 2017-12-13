@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherApp.CurrentConditionsa"
+             Title="Current">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="10">
+                <Label
+                    Text="{Binding City}"
+                    FontSize="Large"
+                    FontFamily="Abril Fatface"
+                    HorizontalOptions="CenterAndExpand" />
+                <Label Margin="0,-5,0,0"
+                    Text="{Binding RegionName}"
+                    FontSize="Small"
+                    HorizontalOptions="CenterAndExpand" />
+                <Label Margin="0,5,0,0"
+                    Text="{Binding Temperature}"
+                    FontSize="Large"
+                    FontAttributes="Bold"
+                    FontFamily="Open Sans"
+                    HorizontalOptions="CenterAndExpand" />
+                <Image Source="{Binding CondImage}" HeightRequest="128" WidthRequest="128" />
+                <Label Margin="0,-10,0,20"
+                    Text="{Binding CondText}"
+                    HorizontalOptions="CenterAndExpand" />
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <StackLayout Orientation="Horizontal" Margin="-10,0,0,0">
+                        <Image Source="{Binding WindImage}" VerticalOptions="Center" />
+                        <StackLayout VerticalOptions="CenterAndExpand">
+                            <Label
+                                Text="{Binding WindSpeed}"
+                                HorizontalOptions="CenterAndExpand" />
+                            <Label
+                                Text="{Binding WindDir}"
+                                HorizontalOptions="CenterAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="5,0,0,0">
+                        <Image Source="{Binding HumidityImage}" VerticalOptions="Center" />
+                        <StackLayout VerticalOptions="CenterAndExpand">
+                            <Label
+                                Text="{Binding Humidity}"
+                                HorizontalOptions="CenterAndExpand" />
+                            <Label
+                                Text="{Binding FeelsLike}"
+                                HorizontalOptions="CenterAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="{Binding PrecipitationImage}" VerticalOptions="Center" />
+                        <Label VerticalOptions="CenterAndExpand" Margin="5,0,0,0"
+                            Text="{Binding Precipitation}"
+                            HorizontalOptions="CenterAndExpand" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="15,0,0,0">
+                        <Image Source="{Binding VisibilityImage}" VerticalOptions="Center" />
+                        <StackLayout VerticalOptions="CenterAndExpand">
+                            <Label
+                                Text="{Binding Clouds}"
+                                HorizontalOptions="CenterAndExpand" />
+                            <Label
+                                Text="{Binding Visibility}"
+                                HorizontalOptions="CenterAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+                <Label Margin="0,10,0,0"
+                    Text="{Binding LastUpdate}"
+                    HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

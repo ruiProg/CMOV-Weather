@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WeatherApp.Models
 {
-    class CurrentTemp
+    public class CurrentTemp
     {
         [JsonProperty("location")]
         public Location Location { get; set; }
@@ -22,7 +22,7 @@ namespace WeatherApp.Models
         }
     }
 
-    class Location
+    public class Location
     {
         [JsonProperty("name")]
         public String City { get; set; }
@@ -41,7 +41,7 @@ namespace WeatherApp.Models
         }
     }
 
-    class InfoData
+    public class InfoData
     {
         [JsonProperty("last_updated")]
         public DateTime LastUpdate { get; set; }
@@ -116,7 +116,7 @@ namespace WeatherApp.Models
         }
     }
 
-    class Condition
+    public class Condition
     {
         [JsonProperty("text")]
         public String Text { get; set; }

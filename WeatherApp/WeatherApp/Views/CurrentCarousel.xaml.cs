@@ -2,29 +2,32 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using WeatherApp.Models;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace WeatherApp
 {
-    public partial class CurrentConditions : CarouselPage
-    {
-        private ObservableCollection<CurrentInfo> All { get; set; }
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class CurrentCarousel : CarouselPage
+	{
+        private ObservableCollection<CityDetails> CurrentCities { get; set; }
 
-        int lastUpdated = -1;
-
-        public CurrentConditions()
-        {
+        public CurrentCarousel ()
+		{
             var listCities = Helpers.Settings.MyCitiesList;
-            InitializeComponent();
-            ItemsSource = null;
-
+            
             if (listCities.Any())
             {
-                All = new ObservableCollection<CurrentInfo>();
+                CurrentCities = new ObservableCollection<CityDetails>();
+                InitializeComponent();
+                ItemsSource = CurrentCities;
                 foreach (var city in Helpers.Settings.MyCitiesList)
-                    All.Add(new CurrentInfo());
-                RetrieveWeather(0);
+                   CurrentCities.Add(new CityDetails());
+                RetrieveWeather();
+                System.Diagnostics.Debug.WriteLine("Heree");
                 if (Device.RuntimePlatform == Device.Android)
                     BackgroundColor = Color.FromHex("#0f4727");
             }
@@ -33,15 +36,12 @@ namespace WeatherApp
 
         async public void ShowError()
         {
-            System.Diagnostics.Debug.WriteLine("Show error called");
             await DisplayAlert("Alert", "No cities available yet", "OK");
-            Application.Current.MainPage = new ManageCities();
         }
 
-        async void RetrieveWeather(int index)
+        async void RetrieveWeather()
         {
-            if (index == -1)
-                index = 0;
+            var index = Children.IndexOf(this.CurrentPage);
             var currentCity = Helpers.Settings.MyCitiesList[index];
             App.currentCity = currentCity.Name + ", " + currentCity.Details;
             CurrentTemp temp = null;
@@ -58,21 +58,14 @@ namespace WeatherApp
                 await DisplayAlert("Alert", "Service is not available", "OK");
             }
             var data = new CurrentInfo(temp);
-            All[index] = data;
-            ItemsSource = All;
-            lastUpdated++;
-            System.Diagnostics.Debug.WriteLine("Called again with index: " + index);
+            CurrentCities[index] = new CityDetails();
+            ItemsSource = CurrentCities;
         }
 
         private void OnPageChanged(object sender, EventArgs e)
         {
-            var index = Children.IndexOf(this.CurrentPage);
-            if (ItemsSource == null || index > lastUpdated)
-            {
-                System.Diagnostics.Debug.WriteLine(Children.IndexOf(this.CurrentPage));
-                RetrieveWeather(index);
-            }
+            base.OnCurrentPageChanged();
+            RetrieveWeather();
         }
     }
 }
-
