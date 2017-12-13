@@ -11,7 +11,7 @@ namespace WeatherApp
     {
         public CityWeatherMenuItem()
         {
-            TargetType = typeof(CityWeatherTabs);
+            TargetType = typeof(CurrentConditions);
 
         }
 

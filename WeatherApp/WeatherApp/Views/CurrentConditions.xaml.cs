@@ -25,17 +25,9 @@ namespace WeatherApp
                 foreach (var city in Helpers.Settings.MyCitiesList)
                     All.Add(new CurrentInfo());
                 RetrieveWeather(0);
-                if (Device.RuntimePlatform == Device.Android)
-                    BackgroundColor = Color.FromHex("#0f4727");
             }
-            else ShowError();
-        }
-
-        async public void ShowError()
-        {
-            System.Diagnostics.Debug.WriteLine("Show error called");
-            await DisplayAlert("Alert", "No cities available yet", "OK");
-            Application.Current.MainPage = new ManageCities();
+            if (Device.RuntimePlatform == Device.Android)
+                BackgroundColor = Color.FromHex("#0f4727");
         }
 
         async void RetrieveWeather(int index)
@@ -58,20 +50,16 @@ namespace WeatherApp
                 await DisplayAlert("Alert", "Service is not available", "OK");
             }
             var data = new CurrentInfo(temp);
+            lastUpdated++;
             All[index] = data;
             ItemsSource = All;
-            lastUpdated++;
-            System.Diagnostics.Debug.WriteLine("Called again with index: " + index);
         }
 
         private void OnPageChanged(object sender, EventArgs e)
         {
             var index = Children.IndexOf(this.CurrentPage);
             if (ItemsSource == null || index > lastUpdated)
-            {
-                System.Diagnostics.Debug.WriteLine(Children.IndexOf(this.CurrentPage));
                 RetrieveWeather(index);
-            }
         }
     }
 }
