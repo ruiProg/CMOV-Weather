@@ -22,6 +22,5 @@ namespace WeatherApp
             InitializeComponent();
             ListView = MenuItemsListView;
         }
-
     }
 }

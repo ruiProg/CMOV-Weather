@@ -50,14 +50,14 @@ namespace WeatherApp
                 await DisplayAlert("Alert", "Service is not available", "OK");
             }
             var data = new CurrentInfo(temp);
-            lastUpdated++;
             All[index] = data;
+            lastUpdated++;
             ItemsSource = All;
         }
 
         private void OnPageChanged(object sender, EventArgs e)
         {
-            var index = Children.IndexOf(this.CurrentPage);
+            var index = Children.IndexOf(CurrentPage);
             if (ItemsSource == null || index > lastUpdated)
                 RetrieveWeather(index);
         }

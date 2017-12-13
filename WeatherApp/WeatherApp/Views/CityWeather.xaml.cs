@@ -21,10 +21,16 @@ namespace WeatherApp
                 MasterBehavior = MasterBehavior.Popover;
         }
 
-        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        async private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem is CityWeatherMenuItem item)
             {
+                if(item.TargetType == typeof(CurrentConditions) && Helpers.Settings.MyCitiesList.Count == 0)
+                {
+                    MasterPage.ListView.SelectedItem = null;
+                    await DisplayAlert("Alert", "No cities available yet", "OK");
+                    return;
+                }
                 var page = (Page)Activator.CreateInstance(item.TargetType);
                 page.Title = item.Title;
 
