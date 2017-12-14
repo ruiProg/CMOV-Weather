@@ -67,7 +67,7 @@ namespace WeatherApp
                     {
                         Label = (i * 3).ToString() + ":00",
                         ValueLabel = values[i].ToString() + toAdd,
-                        Color = SKColor.Parse("#266489")
+                        Color = SKColor.Parse(getColor(i*3))
                     };
                     entries.Add(entry);
                 }
@@ -94,6 +94,45 @@ namespace WeatherApp
             }
         }
 
-       
+        private String getColor(int i)
+        {
+            String returnValue = "";
+            switch (i)
+            {
+                case 0:
+                    returnValue = "#000000";
+                    break;
+                case 3:
+                    returnValue = "#424100";
+                    break;
+                case 6:
+                    returnValue = "#6d6c01";
+                    break;
+                case 9:
+                    returnValue = "#d6d302";
+                    break;
+                case 12:
+                    returnValue = "#fffa00";
+                    break;
+                case 15:
+                    returnValue = "#e0dd00";
+                    break;
+                case 18:
+                    returnValue = "#a09e00";
+                    break;
+                case 21:
+                    returnValue = "#605f00";
+                    break;
+                default:
+                    returnValue = "#266489";
+                    break;
+            }
+
+            return returnValue;
+        }
+
+
+
+
     }
 }
