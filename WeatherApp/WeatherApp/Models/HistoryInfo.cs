@@ -71,20 +71,20 @@ namespace WeatherApp.Models
             City = temp.Location.City;
             RegionName = temp.Location.GeoRegion + ", " + temp.Location.Country;
             var tempData = temp.Forecast.Forecastday[0];
-            //CondText = tempData.Day.Description.Text;
-            //CondImage = "d" + Path.GetFileName(tempData.Day.Description.IconPath);
+            CondText = tempData.Day.Description.Text;
+            CondImage = "d" + Path.GetFileName(tempData.Day.Description.IconPath);
 
             if (Helpers.Settings.GetUnit(Unit.tempUnit))
             {
-                MaxTemperature = tempData.Day.MaxTempFahr + " °F";
-                MinTemperature = tempData.Day.MinTempFahr + " °F";
-                AvgTemperature = tempData.Day.AvgTempFahr + " °F";
+                MaxTemperature = "MaxTemp: " + tempData.Day.MaxTempFahr + " °F";
+                MinTemperature = "MinTemp: " + tempData.Day.MinTempFahr + " °F";
+                AvgTemperature = "AvgTemp: " + tempData.Day.AvgTempFahr + " °F";
             }
             else
             {
-                MaxTemperature = tempData.Day.MaxTempCelsisus + " °C";
-                MinTemperature = tempData.Day.MinTempCelsisus + " °C";
-                AvgTemperature = tempData.Day.AvgTempCelsisus + " °C";
+                MaxTemperature = "MaxTemp: " + tempData.Day.MaxTempCelsisus + " °C";
+                MinTemperature = "MinTemp: " + tempData.Day.MinTempCelsisus + " °C";
+                AvgTemperature = "AvgTemp: " + tempData.Day.AvgTempCelsisus + " °C";
             }
             if (Helpers.Settings.GetUnit(Unit.windUnit))
                 MaxWindSpeed = tempData.Day.MaxWindMPH + " mph";

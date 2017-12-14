@@ -20,16 +20,10 @@ namespace WeatherApp
         {
             InitializeComponent();
             this.historyInfo = historyInfo;
+            BindingContext = historyInfo;
 
             generateChartAsync();
-    /*
-            Content = new Microcharts.ChartView
-            {
-                Text = formatDate(aDay),
-                FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
-                VerticalOptions = LayoutOptions.CenterAndExpand,
-                HorizontalOptions = LayoutOptions.CenterAndExpand,
-            };*/
+   
         }
 
 
@@ -81,8 +75,8 @@ namespace WeatherApp
                     ValueLabelOrientation = Orientation.Horizontal,
                     LabelTextSize = 25,
                     LabelOrientation = Orientation.Horizontal,
-                    MaxValue = 40,
-                    MinValue = -5,
+                   // MaxValue = 40,
+                   // MinValue = -5,
 
                     PointSize = 12
                 };

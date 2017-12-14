@@ -8,27 +8,5 @@
             <On Platform="iOS" Value="0,40,0,0" />
         </OnPlatform>
     </ContentPage.Padding>
-    <ContentPage.Content>
-        <StackLayout>
-            <DatePicker VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
-                <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
-                <DatePicker.MinimumDate>
-                    <sys:DateTime x:FactoryMethod="Parse">
-                        <x:Arguments>
-                            <x:String>Jan 1 2000</x:String>
-                        </x:Arguments>
-                    </sys:DateTime>
-                </DatePicker.MinimumDate>
-                <DatePicker.MaximumDate>
-                    <sys:DateTime x:FactoryMethod="Parse">
-                        <x:Arguments>
-                            <x:String>Dec 31 2050</x:String>
-                        </x:Arguments>
-                    </sys:DateTime>
-                </DatePicker.MaximumDate>
-            </DatePicker>
-            <!--<Button x:Name="dismissButton" Text="Dismiss" Clicked="OnDismissButtonClicked" />
-            <Button x:Name="okButton" Text="OK" Clicked="OnOkButtonClicked" BackgroundColor="Green" />-->
-        </StackLayout>
-    </ContentPage.Content>
+   
 </ContentPage>
