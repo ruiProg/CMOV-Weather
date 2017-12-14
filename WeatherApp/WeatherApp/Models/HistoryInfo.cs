@@ -16,9 +16,11 @@ namespace WeatherApp.Models
 
         public String RegionName { get; set; }
 
-        public String LastUpdate { get; set; }
+        public String MaxTemperature { get; set; }
 
-        public String Temperature { get; set; }
+        public String MinTemperature { get; set; }
+
+        public String AvgTemperature { get; set; }
 
         public String CondText { get; set; }
 
@@ -26,77 +28,76 @@ namespace WeatherApp.Models
 
         public String WindImage { get; set; }
 
-        public String WindSpeed { get; set; }
-
-        public String WindDir { get; set; }
+        public String MaxWindSpeed { get; set; }
 
         public String HumidityImage { get; set; }
 
-        public String Humidity { get; set; }
-
-        public String FeelsLike { get; set; }
+        public String AvgHumidity { get; set; }
 
         public String PrecipitationImage { get; set; }
 
-        public String Precipitation { get; set; }
+        public String TotalPrecipitation { get; set; }
 
         public String VisibilityImage { get; set; }
 
-        public String Clouds { get; set; }
+        public String AvgVisibility { get; set; }
 
-        public String Visibility { get; set; }
+        public List<HistoryData> Hours { get; set; }
 
         public HistoryInfo()
         {
             City = "";
             RegionName = "";
-            LastUpdate = "";
-            Temperature = "";
+            MaxTemperature = "";
+            MinTemperature = "";
+            AvgTemperature = "";
             CondText = "";
             CondImage = "";
-            WindSpeed = "";
-            WindDir = "";
+            MaxWindSpeed = "";
             WindImage = "wind.png";
             HumidityImage = "humidity.png";
             PrecipitationImage = "precipitation.png";
-            Humidity = "";
-            FeelsLike = "";
-            Precipitation = "";
+            AvgHumidity = "";
+
+            TotalPrecipitation = "";
             VisibilityImage = "visibility.png";
-            Clouds = "";
-            Visibility = "";
+            AvgVisibility = "";
+
+            Hours = new List<HistoryData>();
         }
 
         public HistoryInfo(HistoryTemp temp) : this()
         {
             City = temp.Location.City;
             RegionName = temp.Location.GeoRegion + ", " + temp.Location.Country;
-            LastUpdate = String.Format("Last update: {0:r}", temp.Info.LastUpdate);
-            CondText = temp.Info.Description.Text;
-            CondImage = (temp.Info.DayFlag ? "d" : "n") + Path.GetFileName(temp.Info.Description.IconPath);
+            var tempData = temp.Forecast.Forecastday[0].Forecastdata;
+            CondText = tempData.Day.Description.Text;
+            CondImage = "d" + Path.GetFileName(tempData.Day.Description.IconPath);
 
             if (Helpers.Settings.GetUnit(Unit.tempUnit))
             {
-                Temperature = temp.Info.TempFahr + " °F";
-                FeelsLike = "Feels like: " + temp.Info.FeelsFahr + " °F";
+                MaxTemperature = tempData.Day.MaxTempFahr + " °F";
+                MinTemperature = tempData.Day.MinTempFahr + " °F";
+                AvgTemperature = tempData.Day.AvgTempFahr + " °F";
             }
             else
             {
-                Temperature = temp.Info.TempCelsisus + " °C";
-                FeelsLike = "Feels like: " + temp.Info.FeelsCelsius + " °C";
+                MaxTemperature = tempData.Day.MaxTempCelsisus + " °C";
+                MinTemperature = tempData.Day.MinTempCelsisus + " °C";
+                AvgTemperature = tempData.Day.AvgTempCelsisus + " °C";
             }
             if (Helpers.Settings.GetUnit(Unit.windUnit))
-                WindSpeed = temp.Info.WindMPH + " mph";
-            else WindSpeed = temp.Info.WindKPH + " km/h";
-            WindDir = String.Format("{0}° {1}", temp.Info.WindDegrees, temp.Info.WindDir);
-            Humidity = "Humidity: " + temp.Info.Humidity + "%";
+                MaxWindSpeed = tempData.Day.MaxWindMPH + " mph";
+            else MaxWindSpeed = tempData.Day.MaxWindKPH + " km/h";
+            AvgHumidity = "Avg Humidity: " + tempData.Day.AvgHumidity + "%";
             if (Helpers.Settings.GetUnit(Unit.precUnit))
-                Precipitation = temp.Info.PrecInches + " in";
-            else Precipitation = temp.Info.PrecMeters + " mm";
-            Clouds = "Cloud cover: " + temp.Info.Cloud + "%";
+                TotalPrecipitation = tempData.Day.TotalPrecInches + " in";
+            else TotalPrecipitation = tempData.Day.TotalPrecMeters + " mm";
             if (Helpers.Settings.GetUnit(Unit.visUnit))
-                Visibility = "Visibility: " + temp.Info.VisMiles + " mi";
-            else Visibility = "Visibility: " + temp.Info.VisKms + " km";
+                AvgVisibility = "Visibility: " + tempData.Day.AvgVisMiles + " mi";
+            else AvgVisibility = "Visibility: " + tempData.Day.AvgVisKms + " km";
+
+            Hours = tempData.Hours;
 
         }
 
