@@ -30,12 +30,85 @@ namespace WeatherApp.Models
     public class Forecastday
     {
         [JsonProperty("forecastday")]
-        public HistoryData HistoryData { get; set; }
+        public Forecastdata Forecastdata { get; set; }
 
         public Forecastday()
         {
-            HistoryData = new HistoryData();
+            Forecastdata = new Forecastdata();
         }
+    }
+
+    public class Forecastdata
+    {
+        [JsonProperty("date")]
+        public DateTime Date { get; set; }
+
+        [JsonProperty("day")]
+        public ForecastDay Day { get; set; }
+
+        [JsonProperty("hour")]
+        public List<HistoryData> Hours { get; set; }
+
+        public Forecastdata()
+        {
+            Date = new DateTime();
+            Day = new ForecastDay();
+            Hours = new List<HistoryData>();
+        }
+    }
+
+    public class ForecastDay
+    {
+
+
+        [JsonProperty("maxtemp_c")]
+        public float MaxTempCelsisus { get; set; }
+
+        [JsonProperty("maxtemp_f")]
+        public float MaxTempFahr { get; set; }
+
+        [JsonProperty("mintemp_c")]
+        public float MinTempCelsisus { get; set; }
+
+        [JsonProperty("mintemp_f")]
+        public float MinTempFahr { get; set; }
+
+        [JsonProperty("avgtemp_c")]
+        public float AvgTempCelsisus { get; set; }
+
+        [JsonProperty("avgtemp_f")]
+        public float AvgTempFahr { get; set; }
+
+
+
+        [JsonProperty("condition")]
+        public Condition Description { get; set; }
+
+        [JsonProperty("maxwind_mph")]
+        public float MaxWindMPH { get; set; }
+
+
+        [JsonProperty("maxwind_kph")]
+        public float MaxWindKPH { get; set; }
+
+
+        [JsonProperty("totalprecip_mm")]
+        public float TotalPrecMeters { get; set; }
+
+        [JsonProperty("totalprecip_in")]
+        public float TotalPrecInches { get; set; }
+
+        [JsonProperty("avghumidity")]
+        public int AvgHumidity { get; set; }
+
+  
+
+        [JsonProperty("avgvis_km")]
+        public float AvgVisKms { get; set; }
+
+        [JsonProperty("avgvis_miles")]
+        public float AvgVisMiles { get; set; }
+
     }
 
     public class HistoryData
