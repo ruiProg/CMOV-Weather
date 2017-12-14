@@ -1,14 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace WeatherApp.Models
 {
-    public class CurrentInfo
+
+    
+    public class HistoryInfo
     {
+
         public String City { get; set; }
 
         public String RegionName { get; set; }
@@ -28,7 +31,7 @@ namespace WeatherApp.Models
         public String WindDir { get; set; }
 
         public String HumidityImage { get; set; }
-        
+
         public String Humidity { get; set; }
 
         public String FeelsLike { get; set; }
@@ -43,9 +46,7 @@ namespace WeatherApp.Models
 
         public String Visibility { get; set; }
 
-        
-
-        public CurrentInfo()
+        public HistoryInfo()
         {
             City = "";
             RegionName = "";
@@ -66,7 +67,7 @@ namespace WeatherApp.Models
             Visibility = "";
         }
 
-        public CurrentInfo(CurrentTemp temp) : this()
+        public HistoryInfo(HistoryTemp temp) : this()
         {
             City = temp.Location.City;
             RegionName = temp.Location.GeoRegion + ", " + temp.Location.Country;
@@ -77,7 +78,7 @@ namespace WeatherApp.Models
             if (Helpers.Settings.GetUnit(Unit.tempUnit))
             {
                 Temperature = temp.Info.TempFahr + " °F";
-                FeelsLike = "Feels like: " +  temp.Info.FeelsFahr + " °F";
+                FeelsLike = "Feels like: " + temp.Info.FeelsFahr + " °F";
             }
             else
             {

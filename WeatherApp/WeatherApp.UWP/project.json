@@ -1,7 +1,8 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.4",
-    "SkiaSharp.Views.Forms": "1.59.2",
+    "Microcharts.Forms": "0.8.3-pre",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.5",
+    "System.ValueTuple": "4.4.0",
     "Xam.Plugins.Settings": "3.1.1",
     "Xamarin.Forms": "2.5.0.121934"
   },

@@ -14,7 +14,7 @@ namespace WeatherApp
         static HttpClient client = new HttpClient();
         static String apixuKey = "48de77b9d0584523a65161204170812";
         static String apixuBaseUrl = "https://api.apixu.com/v1";
-        static String serverURL = "http://10.0.2.2:5000";
+        static String serverURL = "http://8c339412.ngrok.io";
 
         public static async Task<CurrentTemp> getCurrentWeather()
         {
@@ -26,6 +26,22 @@ namespace WeatherApp
             if (response != null) {
                 string json = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<CurrentTemp>(json);
+            }
+
+            return null;
+        }
+
+        public static async Task<HistoryTemp> getHistoryWeather(string date)
+        {
+            if (string.IsNullOrEmpty(App.currentCity))
+                throw new InvalidOperationException("This cannot be called without a city");
+            var queryString = String.Format("{0}/history.json?key={1}&q={2}&dt={3}", apixuBaseUrl, apixuKey, App.currentCity, date);
+            var response = await client.GetAsync(queryString);
+
+            if (response != null)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<HistoryTemp>(json);
             }
 
             return null;
