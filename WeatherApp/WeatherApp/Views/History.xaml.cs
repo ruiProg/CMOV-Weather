@@ -23,13 +23,13 @@ namespace WeatherApp
             BindingContext = historyInfo;
 
             generateChartAsync();
-   
+
         }
 
 
         private async void generateChartAsync()
         {
-            if(this.historyInfo.Hours.Count() != 24)
+            if (this.historyInfo.Hours.Count() != 24)
             {
                 await DisplayAlert("Alert", "Error in request", "OK");
             }
@@ -38,7 +38,7 @@ namespace WeatherApp
                 List<float> values = new List<float>();
                 String toAdd = "";
 
-                for (int i = 0; i < this.historyInfo.Hours.Count(); i=i+3)
+                for (int i = 0; i < this.historyInfo.Hours.Count(); i = i + 3)
                 {
                     if (Helpers.Settings.GetUnit(Unit.tempUnit))
                     {
@@ -50,22 +50,21 @@ namespace WeatherApp
                         values.Add(historyInfo.Hours[i].TempCelsisus);
                         toAdd = "°C";
                     }
-                        
+
 
                 }
 
                 var entries = new List<Microcharts.Entry>();
                 for (int i = 0; i < values.Count; i++)
                 {
-                   var entry = new Microcharts.Entry(values[i])
+                    var entry = new Microcharts.Entry(values[i])
                     {
                         Label = (i * 3).ToString() + ":00",
                         ValueLabel = values[i].ToString() + toAdd,
-                        Color = SKColor.Parse(getColor(i*3))
+                        Color = SKColor.Parse(getColor(i * 3))
                     };
                     entries.Add(entry);
                 }
-
                 var chart = new LineChart()
                 {
                     Entries = entries,
@@ -75,11 +74,14 @@ namespace WeatherApp
                     ValueLabelOrientation = Orientation.Horizontal,
                     LabelTextSize = 25,
                     LabelOrientation = Orientation.Horizontal,
-                   // MaxValue = 40,
-                   // MinValue = -5,
-
                     PointSize = 12
                 };
+
+                if (Device.RuntimePlatform == Device.Android)
+                {
+                    chart.BackgroundColor = SKColor.Parse("#303030");
+                }
+
 
 
                 chartView.Chart = chart;
