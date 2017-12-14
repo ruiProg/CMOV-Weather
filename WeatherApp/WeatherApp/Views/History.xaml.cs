@@ -7,54 +7,22 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Microcharts;
 using SkiaSharp;
-
-
+using WeatherApp.Models;
 
 namespace WeatherApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class History : ContentPage
     {
+        public HistoryInfo historyInfo;
 
-
-        public History(String City, DateTime date)
+        public History(HistoryInfo historyInfo)
         {
             InitializeComponent();
-            DateTime aDay = DateTime.Now;
+            this.historyInfo = historyInfo;
 
-            var entries = new List<Microcharts.Entry>
-             {
-                new Microcharts.Entry(200)
-                {
-                    Label = "Jan",
-                    ValueLabel = "200",
-                    Color = SKColor.Parse("#266489")
-                },
-                new Microcharts.Entry(400)
-                {
-                Label = "Feb",
-                ValueLabel = "400",
-                Color = SKColor.Parse("#68B9C0")
-                },
-                new Microcharts.Entry(-100)
-                {
-                Label = "Mar",
-                ValueLabel = "100",
-                Color = SKColor.Parse("#90D585")
-                }
-            };
-            
-
-            var chart = new LineChart() { Entries = entries ,
-            LineMode = LineMode.Straight,
-            LineSize = 6,
-            PointMode = PointMode.Circle,
-            PointSize = 12
-            };
-            
-
-            chartView.Chart = chart;
-            /*
+            generateChartAsync();
+    /*
             Content = new Microcharts.ChartView
             {
                 Text = formatDate(aDay),
@@ -64,10 +32,68 @@ namespace WeatherApp
             };*/
         }
 
-        public String formatDate(DateTime date)
-        {
-            return date.Year + "-" + date.Month + "-" + date.Day;
 
+        private async void generateChartAsync()
+        {
+            if(this.historyInfo.Hours.Count() != 24)
+            {
+                await DisplayAlert("Alert", "Error in request", "OK");
+            }
+            else
+            {
+                List<float> values = new List<float>();
+                String toAdd = "";
+
+                for (int i = 0; i < this.historyInfo.Hours.Count(); i=i+3)
+                {
+                    if (Helpers.Settings.GetUnit(Unit.tempUnit))
+                    {
+                        values.Add(historyInfo.Hours[i].TempFahr);
+                        toAdd = "°F";
+                    }
+                    else
+                    {
+                        values.Add(historyInfo.Hours[i].TempCelsisus);
+                        toAdd = "°C";
+                    }
+                        
+
+                }
+
+                var entries = new List<Microcharts.Entry>();
+                for (int i = 0; i < values.Count; i++)
+                {
+                   var entry = new Microcharts.Entry(values[i])
+                    {
+                        Label = (i * 3).ToString() + ":00",
+                        ValueLabel = values[i].ToString() + toAdd,
+                        Color = SKColor.Parse("#266489")
+                    };
+                    entries.Add(entry);
+                }
+
+                var chart = new LineChart()
+                {
+                    Entries = entries,
+                    LineMode = LineMode.Straight,
+                    LineSize = 6,
+                    PointMode = PointMode.Circle,
+                    ValueLabelOrientation = Orientation.Horizontal,
+                    LabelTextSize = 25,
+                    LabelOrientation = Orientation.Horizontal,
+                    MaxValue = 40,
+                    MinValue = -5,
+
+                    PointSize = 12
+                };
+
+
+                chartView.Chart = chart;
+
+
+            }
         }
+
+       
     }
 }

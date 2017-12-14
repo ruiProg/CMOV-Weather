@@ -70,9 +70,9 @@ namespace WeatherApp.Models
         {
             City = temp.Location.City;
             RegionName = temp.Location.GeoRegion + ", " + temp.Location.Country;
-            var tempData = temp.Forecast.Forecastday[0].Forecastdata;
-            CondText = tempData.Day.Description.Text;
-            CondImage = "d" + Path.GetFileName(tempData.Day.Description.IconPath);
+            var tempData = temp.Forecast.Forecastday[0];
+            //CondText = tempData.Day.Description.Text;
+            //CondImage = "d" + Path.GetFileName(tempData.Day.Description.IconPath);
 
             if (Helpers.Settings.GetUnit(Unit.tempUnit))
             {

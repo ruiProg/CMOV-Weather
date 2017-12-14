@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using WeatherApp.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -98,9 +98,37 @@ namespace WeatherApp
 
         async void OnOkButtonClicked(object sender, EventArgs args)
         {
+            App.currentCity = City;
+            HistoryTemp temp = null;
+            try
+            {
+                temp = await Service.getHistoryWeather(formatDate(datepicker.Date));
+            }
+            catch (Exception)
+            {
+            }
+            if (temp == null)
+            {
+                temp = new HistoryTemp();
+                await DisplayAlert("Alert", "Service is not available", "OK");
+
+            }
+            else
+            {
+                HistoryInfo data = new HistoryInfo(temp);
+                var historyPage = new History(data);
+                await Navigation.PushAsync(historyPage);
+            }
             
-            var historyPage = new History(City, datepicker.Date);
-            await Navigation.PushAsync(historyPage);
+
+        }
+
+
+        
+
+        public String formatDate(DateTime date)
+        {
+            return date.Year + "-" + date.Month + "-" + date.Day;
 
         }
     }

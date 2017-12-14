@@ -19,24 +19,15 @@ namespace WeatherApp.Models
     public class Forecast
     {
         [JsonProperty("forecastday")]
-        public List<Forecastday> Forecastday { get; set; }
+        public List<Forecastdata> Forecastday { get; set; }
 
         public Forecast()
         {
-            Forecastday = new List<Forecastday>();
+            Forecastday = new List<Forecastdata>();
         }
     }
 
-    public class Forecastday
-    {
-        [JsonProperty("forecastday")]
-        public Forecastdata Forecastdata { get; set; }
-
-        public Forecastday()
-        {
-            Forecastdata = new Forecastdata();
-        }
-    }
+   
 
     public class Forecastdata
     {
@@ -99,7 +90,7 @@ namespace WeatherApp.Models
         public float TotalPrecInches { get; set; }
 
         [JsonProperty("avghumidity")]
-        public int AvgHumidity { get; set; }
+        public float AvgHumidity { get; set; }
 
   
 
