@@ -14,7 +14,7 @@ namespace WeatherApp
         static HttpClient client = new HttpClient();
         static String apixuKey = "48de77b9d0584523a65161204170812";
         static String apixuBaseUrl = "https://api.apixu.com/v1";
-        static String serverURL = "http://8c339412.ngrok.io";
+        static String serverURL = "http://18c60ea6.ngrok.io";
 
         public static async Task<CurrentTemp> getCurrentWeather()
         {
