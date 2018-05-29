@@ -4,10 +4,10 @@
 
 username: cmovweather@gmail.com
 
-pass: December14
+pass: ****** <!-- December14 -->
 
 #### API key:
-48de77b9d0584523a65161204170812
+***************** <!-- 48de77b9d0584523a65161204170812 -->
 
 #### Server with cities uses Flask:
 http://flask.pocoo.org/
